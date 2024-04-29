@@ -11,12 +11,60 @@
     <br>
     <h3>
         <ul>
-            <li><a href="./recipes/lasagna.html">Lasagna</a></li>
-            <li><a href="./recipes/champagne_chicken.html">Champagne Chicken</a></li>
-            <li><a href="./recipes/roasted_broccoli.html">Easy Roasted Broccoli</a></li>
-            <li><a href="./recipes/garlic_mushrooms.html">Garlic Mushrooms</a></li>
-            <li><a href="./recipes/oven_roasted_grape_tomatoes.html">Oven Roasted Grape Tomatoes</a></li>
+            <li><a href="./recipes/lasagna.html" onmouseover="showPopup('lasagna')" onmouseout="hidePopup('lasagna')">Lasagna</a></li>
+            <li><a href="./recipes/champagne_chicken.html" onmouseover="showPopup('champagne_chicken')" onmouseout="hidePopup('champagne_chicken')">Champagne Chicken</a></li>
+            <li><a href="./recipes/roasted_broccoli.html" onmouseover="showPopup('roasted_broccoli')" onmouseout="hidePopup('roasted_broccoli')">Easy Roasted Broccoli</a></li>
+            <li><a href="./recipes/garlic_mushrooms.html" onmouseover="showPopup('garlic_mushrooms')" onmouseout="hidePopup('garlic_mushrooms')">Garlic Mushrooms</a></li>
+            <li><a href="./recipes/oven_roasted_grape_tomatoes.html" onmouseover="showPopup('oven_roasted_grape_tomatoes')" onmouseout="hidePopup('oven_roasted_grape_tomatoes')">Oven Roasted Grape Tomatoes</a></li>
         </ul>
+        <script>
+            function showPopup(recipe) {
+                let xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        let popup = document.createElement('div');
+                        popup.classList.add('popup');
+                        popup.setAttribute('id', recipe);
+                        popup.innerHTML = this.responseText;
+                        document.body.appendChild(popup);
+                    }
+                };
+                xhttp.open('GET', './recipes/' + recipe + '.html', true);
+                xhttp.send();
+            }
+            
+            function hidePopup(recipe) {
+                var popup = document.getElementById(recipe);
+                if (popup) {
+                    popup.remove();
+                }
+            }
+        </script>
+        <style>
+            .popup {
+                position: absolute;
+                background-color: white;
+                border: 1px solid black;
+                padding: 10px;
+                width: 450px;
+            }
+        </style>
     </h3>
+    
+    <button onclick="window.location.href = recipes[Math.floor(Math.random() * recipes.length)]">Go to a random
+        recipe!</button>
+    
+    <br>
+    <br>
+
+    <script>
+        var recipes = [
+            "./recipes/lasagna.html",
+            "./recipes/champagne_chicken.html",
+            "./recipes/roasted_broccoli.html",
+            "./recipes/garlic_mushrooms.html",
+            "./recipes/oven_roasted_grape_tomatoes.html"
+        ];
+    </script>
 </body>
 </html>
