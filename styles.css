@@ -1,3 +1,7 @@
-* {
-    outline: solid 2px red;
+.popup {
+    position: absolute;
+    background-color: rgb(226, 222, 222);
+    border: 1px solid black;
+    padding: 10px;
+    width: 475px;
 }
