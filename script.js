@@ -7,19 +7,17 @@ var recipes = [
 ];
 
 function showPopup(recipe) {
-    let xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
+    fetch('./recipes/' + recipe + '.html')
+        .then(response => response.text())
+        .then(html => {
             let popup = document.createElement('div');
             popup.classList.add('popup');
             popup.setAttribute('id', recipe);
-            popup.innerHTML = this.responseText;
+            popup.innerHTML = html;
             document.body.appendChild(popup);
-        }
-    };
-    xhttp.open('GET', './recipes/' + recipe + '.html', true);
-    xhttp.send();
-};
+        })
+        .catch(error => console.error(error));
+}
 
 function hidePopup(recipe) {
     var popup = document.getElementById(recipe);
